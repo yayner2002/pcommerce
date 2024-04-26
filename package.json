@@ -1,0 +1,15 @@
+{
+  "name": "pcommerce",
+  "version": "1.0.0",
+  "description": "This is a full stack practical commerce app build using react express node and MYSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server":"nodemon backend/server.js"
+  },
+  "author": "yayner",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
