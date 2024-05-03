@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "This is a full stack practical commerce app build using react express node and MYSQL",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server.js",
-    "server":"nodemon backend/server.js"
+    "server": "nodemon backend/server.js"
   },
   "author": "yayner",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "sequelize": "^6.37.3"
   }
 }
