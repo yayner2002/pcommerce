@@ -2,6 +2,8 @@ import express, { response } from "express"; // custome: esmodule
 import { connectDB } from "./db/config.js";
 import User from "./models/userModel.js";
 import bodyParser from "body-parser";
+import userRoutes from "./routes/userRoutes.js"
+import productRoutes from "./routes/productRoutes.js"
 
 connectDB();
 
@@ -10,19 +12,11 @@ const PORT = 5000;
 
 const app = express();
 app.use(bodyParser.json());
-// GET : http://localhost:5000/api/users
 
-// Get All Usrs
-app.get("/api/users", async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.status(200).json(users);
-  } catch (error) {
-    console.log(error);
-  }
-});
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes)
 
-// Create  All Users
+// change this so you can use the router to Create  All Users
 app.post("/api/users", async (req, res) => {
   const { username, email, password, isAdmin } = req.body;
 
@@ -41,4 +35,5 @@ app.post("/api/users", async (req, res) => {
   }
 });
 
+// add port into the .env file and access it here
 app.listen(PORT, () => console.log(`Server listening on port : ${PORT} `));
