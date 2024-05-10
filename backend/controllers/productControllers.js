@@ -51,6 +51,17 @@ const deleteProduct = async (req, res) => {
     console.log(error);
   }
 };
-// find product by id
+// find all products
 
-export { createProduct, deleteProduct };
+
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.findAll();
+    res.status(200).json(products);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export { createProduct, deleteProduct, getAllProducts };
