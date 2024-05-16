@@ -17,11 +17,17 @@ const Product = sequelize.define("Products", {
   },
   price: DataTypes.INTEGER,
   countInStock: DataTypes.INTEGER,
-  rating: DataTypes.FLOAT,
-  numReviews: DataTypes.INTEGER,
+  rating: {
+    type: DataTypes.FLOAT,
+    defaultValue: 3.5
+  },
+  numReviews: {
+    type: DataTypes.INTEGER,
+    defaultValue: 4
+  }
 });
 
-Product.sync()
+Product.sync({ alter: true})
   .then(() => console.log("Table and Model Synched."))
   .catch((err) => console.log(err));
 

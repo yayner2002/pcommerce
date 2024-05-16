@@ -1,17 +1,29 @@
-// import products from "../products.js";
 import Product from "../components/Product.jsx";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // get request to http://localhost:5000/api/products
-
     const fetchProducts = async () => {
-      const res = await fetch("http://localhost:5000/api/products");
-      const products = await res.json();
-      setProducts(products);
+      try {
+        const res = await fetch("http://localhost:5000/api/products");
+
+        if (!res.ok) {
+          throw new Error("Failed to Fetch products.");
+        }
+
+        const products = await res.json();
+        setProducts(products);
+
+        // set loading to false
+      } catch (error) {
+        console.log(error);
+      } finally {
+        // set loading to false
+      }
     };
 
     fetchProducts();
