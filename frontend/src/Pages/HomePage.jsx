@@ -12,23 +12,28 @@ const HomePage = () => {
         const res = await fetch("http://localhost:5000/api/products");
 
         if (!res.ok) {
-          throw new Error("Failed to Fetch products.");
+          // throw new Error("Failed to Fetch products.");
+          toast.error("Failed to Fetch products.");
         }
 
         const products = await res.json();
         setProducts(products);
 
         // set loading to false
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       } finally {
         // set loading to false
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
       <h1>Featured Products</h1>
       <Row>

@@ -1,6 +1,8 @@
 import { where } from "sequelize";
 import Product from "../models/productModel.js";
 
+// @desc  Add  product
+// @route POST /api/products
 const createProduct = async (req, res) => {
   const {
     name,
@@ -51,8 +53,9 @@ const deleteProduct = async (req, res) => {
     console.log(error);
   }
 };
-// find all products
 
+// @desc  Fetch all products
+// @route GET /api/products
 
 const getAllProducts = async (req, res) => {
   try {
@@ -61,7 +64,26 @@ const getAllProducts = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
+// @desc  Fetch Single Product
+// @route GET /api/products/:id
 
-export { createProduct, deleteProduct, getAllProducts };
+const getProductById = async (req, res) => {
+  const { id: productId } = req.params;
+  try {
+    const product = await Product.findAll({
+      where: {
+        id: productId,
+      },
+    });
+    if (product) {
+      res.status(200).json(product);
+    }
+    res.status(404).json({ message: "Product not found." });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createProduct, deleteProduct, getAllProducts, getProductById };
